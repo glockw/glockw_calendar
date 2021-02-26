@@ -1,5 +1,5 @@
 {
-  "name": "glock_calendar",
+  "name": "glockw_calendar",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
   "dependencies": {
     "next": "10.0.7",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "tailwindcss": "^2.0.3"
   }
 }
