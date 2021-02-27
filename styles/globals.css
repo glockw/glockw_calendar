@@ -4,12 +4,13 @@
 
 .day-base {
   @apply border-2 border-gray-300 h-32 w-32 p-1 text-lg font-bold;
+  cursor: pointer;
 }
 
 .day-name {
   @apply bg-indigo-700 border-2 border-gray-300 h-10 w-32;
 }
-
+  
 .day-tile {
   @apply day-base bg-white;
 }

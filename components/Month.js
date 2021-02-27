@@ -3,15 +3,13 @@ import DaysOfTheWeek from "./DaysOfTheWeek";
 import Week from "./Week";
 
 export default function Month() {
-  const [first, second, third, fourth, fifth] = daysOfMonth();
+  const weeks = daysOfMonth();
   return (
     <div className="mx-auto">
       <DaysOfTheWeek />
-      <Week days={first} />
-      <Week days={second} />
-      <Week days={third} />
-      <Week days={fourth} />
-      <Week days={fifth} />
+      {weeks.map((week, index) => (
+        <Week key={`Week__${index}`} days={week} />
+      ))}
     </div>
   );
 }
