@@ -1,10 +1,11 @@
 import Day from "./Day";
-export default function Week() {
+export default function Week({ days }) {
   return (
     <div className="flex items-center">
-      {new Array(7).fill(0).map((_, index) => (
-        <Day key={`Day__${index}`} index={index} />
+      {days.map((day, index) => (
+        <Day key={`Day__${index}`} {...day} />
       ))}
     </div>
   );
+  x;
 }

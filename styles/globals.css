@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 .day-base {
-  @apply border-2 border-gray-300 h-32 w-32;
+  @apply border-2 border-gray-300 h-32 w-32 p-1 text-lg font-bold;
+  cursor: pointer;
 }
 
 .day-name {
@@ -15,5 +16,9 @@
 }
 
 .day_current {
-  @apply day-base bg-indigo-700;
+  @apply day-base bg-indigo-200 text-gray-600;
+}
+
+.input-form {
+  @apply mt-0 block w-full px-0.5 border-0 my-1 border-b-2 border-gray-200 focus:ring-0 focus:border-indigo-500;
 }

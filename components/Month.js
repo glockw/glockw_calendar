@@ -1,17 +1,15 @@
-import { startAndEndOfMonth } from "../services/time";
+import { daysOfMonth } from "../services/time";
 import DaysOfTheWeek from "./DaysOfTheWeek";
 import Week from "./Week";
 
 export default function Month() {
-  const { start, end } = startAndEndOfMonth();
+  const weeks = daysOfMonth();
   return (
     <div className="mx-auto">
       <DaysOfTheWeek />
-      <Week />
-      <Week />
-      <Week />
-      <Week />
-      <Week />
+      {weeks.map((week, index) => (
+        <Week key={`Week__${index}`} days={week} />
+      ))}
     </div>
   );
 }
