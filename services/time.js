@@ -5,6 +5,21 @@ const getMonth = (_) => moment().month();
 
 const daysInMonth = (_) => moment().daysInMonth();
 
+const hourRange = (gt) => {
+  const minutes = new Array(60)
+    .fill(0)
+    .map((s, i) => i)
+    .filter((i) => !(i % 15));
+  const hours = new Array(24).fill(0).map((_, i) => i);
+  const format = (h) => (h < 10 ? `0${h}` : h);
+
+  const time = hours.map((h) =>
+    minutes.map((m) => `${format(h)}:${format(m)}`)
+  );
+
+  return time.flat();
+};
+
 const startAndEndOfMonth = (_) => ({
   start: moment().clone().startOf("month").day(),
   end: moment().clone().endOf("month").day(),
@@ -13,9 +28,7 @@ const startAndEndOfMonth = (_) => ({
 const prev = () => moment().add(-1, "month");
 const next = () => moment().add(1, "month");
 
-const currentD = () => moment().date();
-
-getPastMonthDay = () => {
+const getPastMonthDay = () => {
   let { start } = startAndEndOfMonth();
   let daysBack = [];
   let prevM = prev();
@@ -25,7 +38,7 @@ getPastMonthDay = () => {
   while (start > 0) {
     daysBack = daysBack.concat({
       index: pastMonthDays,
-      date: moment(`${prevMonth}-${pastMonthDays}-${year}`),
+      date: moment(`${prevMonth}-${pastMonthDays}-${year}`, "MM-DD-YYYY"),
       current: false,
     });
     pastMonthDays -= 1;
@@ -37,7 +50,7 @@ const daysOfMonth = () => {
   const month = dateGenerator(daysInMonth(), getMonth(), moment().year());
   const back = getPastMonthDay();
   const front = dateGenerator(
-    GRID_LEN - month.length - daysBack.length,
+    GRID_LEN - month.length - back.length,
     next().month(),
     next().year()
   );
@@ -54,8 +67,8 @@ const daysOfMonth = () => {
 const dateGenerator = (days, month, year) =>
   new Array(days).fill(0).map((_, index) => ({
     index: index + 1,
-    date: moment(`${month}-${index + 1}-${year}`),
+    date: moment(`${month}-${index + 1}-${year}`, "MM-DD-YYYY"),
     current: index + 1 === moment().date(),
   }));
 
-export { getMonth, daysInMonth, startAndEndOfMonth, daysOfMonth, currentD };
+export { daysOfMonth, hourRange };
