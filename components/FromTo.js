@@ -1,8 +1,7 @@
-import { useTime } from "../hooks/useTime";
 import ClockIcon from "./ClockIcon";
 
-export default function FromTo() {
-  const { from, to, fromHour, toHour, setFrom, setTo } = useTime();
+export default function FromTo({ settings }) {
+  const { from, to, fromHour, toHour, setFrom, setTo } = settings;
 
   return (
     <div className="flex p-2  justify-start">
@@ -12,7 +11,7 @@ export default function FromTo() {
       <div>
         <input
           className="mt-1 block w-40 h-10  text-center rounded-md bg-gray-100  border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
-          defaultValue={fromHour}
+          value={fromHour}
           readOnly
         />
         <input
@@ -30,7 +29,7 @@ export default function FromTo() {
         <input
           readOnly
           className="mt-1 block w-40 h-10  text-center rounded-md bg-gray-100  border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
-          defaultValue={toHour}
+          value={toHour}
         />
         <input
           className="mt-1 block w-40 h-10"

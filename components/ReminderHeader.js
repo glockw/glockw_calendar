@@ -1,8 +1,8 @@
-import moment from "moment";
+import { useSelector } from "react-redux";
 import ClockIcon from "./ClockIcon";
 
 export default function ReminderHeader() {
-  const date = moment().format("MMMM Do YYYY");
+  const { date } = useSelector((state) => state);
   return (
     <div className="flex flex-row justify-center items-center h-full">
       <ClockIcon />

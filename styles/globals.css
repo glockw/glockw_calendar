@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .day-base {
-  @apply border-2 border-gray-300 h-32 w-32 p-1 text-lg font-bold;
+  @apply border-2 border-gray-300 h-32 w-32 p-1 text-lg font-bold overflow-auto;
   cursor: pointer;
 }
 
@@ -21,4 +21,8 @@
 
 .input-form {
   @apply mt-0 block w-full px-0.5 border-0 my-1 border-b-2 border-gray-200 focus:ring-0 focus:border-indigo-500;
+}
+
+.save-button {
+  @apply focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-indigo-500 hover:bg-indigo-700 hover:shadow-lg;
 }
