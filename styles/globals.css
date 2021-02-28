@@ -23,6 +23,10 @@
   @apply mt-0 block w-full px-0.5 border-0 my-1 border-b-2 border-gray-200 focus:ring-0 focus:border-indigo-500;
 }
 
+.error {
+  @apply border-red-400;
+}
+
 .save-button {
   @apply focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-indigo-500 hover:bg-indigo-700 hover:shadow-lg;
 }
