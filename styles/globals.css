@@ -30,3 +30,7 @@
 .save-button {
   @apply focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-indigo-500 hover:bg-indigo-700 hover:shadow-lg;
 }
+
+.h-70 {
+  height: 17.5rem;
+}
