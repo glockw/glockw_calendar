@@ -1,10 +1,16 @@
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { OPEN_DIALOG } from "../actions/action";
+import { OPEN_DIALOG, setDate } from "../actions/action";
+
 export default function Day({ index, current, ...rest }) {
   let { date, reminders, id } = rest;
   const dispatch = useDispatch();
 
+  const router = useRouter();
+  const goTo = () => {
+    dispatch(setDate(id));
+    router.push("/date");
+  };
   const openReminder = () => {
     dispatch({
       type: OPEN_DIALOG,
@@ -14,19 +20,14 @@ export default function Day({ index, current, ...rest }) {
   };
 
   return (
-    <Link href={"/date"}>
-      <div className={current ? "day_current" : "day-tile"}>
-        {index}
+    <div onClick={goTo} className={current ? "day_current" : "day-tile"}>
+      {index}
 
-        {reminders.map((r, i) => (
-          <div
-            style={{ backgroundColor: r.color, color: "white" }}
-            key={`${i}`}
-          >
-            {r.title}
-          </div>
-        ))}
-      </div>
-    </Link>
+      {reminders.map((r, i) => (
+        <div style={{ backgroundColor: r.color, color: "white" }} key={`${i}`}>
+          {r.title}
+        </div>
+      ))}
+    </div>
   );
 }

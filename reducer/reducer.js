@@ -1,7 +1,10 @@
 import {
   CLOSE_DIALOG,
   CREATE_REMINDER,
+  NEXT_DATE,
   OPEN_DIALOG,
+  PREV_DATE,
+  SET_DATE,
   UPDATE_REMINDER,
 } from "../actions/action";
 import { daysOfMonth } from "../services/time";
@@ -21,6 +24,26 @@ const reducer = (state = initialState, action) => {
         date: action.date,
         id: action.id,
         showReminder: true,
+      };
+
+    case SET_DATE:
+      return {
+        ...state,
+        day: action.day,
+      };
+    case PREV_DATE:
+      return {
+        ...state,
+        day: state.month.flat()[action.index - 1],
+      };
+    case NEXT_DATE:
+      return {
+        ...state,
+        day: state.month.flat()[action.index + 1],
+      };
+    case PREV_DATE:
+      return {
+        ...state,
       };
     case CREATE_REMINDER:
       let { id, date } = action;

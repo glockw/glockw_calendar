@@ -1,8 +1,9 @@
-export default function ArrowButton({ direction = PREV }) {
+export default function ArrowButton({ direction = PREV, ...rest }) {
   const path = direction == PREV ? PREV_DIR : NEXT_DIR;
   return (
     <button
       type="button"
+      {...rest}
       className="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-300 p-1 items-center"
     >
       <svg

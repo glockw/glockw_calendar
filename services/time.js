@@ -66,13 +66,18 @@ const daysOfMonth = () => {
   ];
 };
 
-const dateGenerator = (days, month, year) =>
-  new Array(days).fill(0).map((_, index) => ({
-    id: `${month}-${index}`,
-    index: index + 1,
-    date: new Date(year, month, index),
-    current: index + 1 === moment().date(),
-    reminders: [],
-  }));
+const dateGenerator = (days, month, year) => {
+  const today = new Date().toDateString();
+  return new Array(days).fill(0).map((_, index) => {
+    const date = new Date(year, month, index + 1);
+    return {
+      id: `${month}-${index}`,
+      index: index + 1,
+      date,
+      current: date.toDateString() === today,
+      reminders: [],
+    };
+  });
+};
 
 export { daysOfMonth, hourRange };
