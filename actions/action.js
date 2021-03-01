@@ -1,7 +1,7 @@
 const CREATE_REMINDER = "CREATE_REMINDER";
 const UPDATE_REMINDER = "UPDATE_REMINDER";
 const CLOSE_DIALOG = "CLOSE_DIALOG";
-const OPEN_DIALOG = "OPEN_DIALOG";
+const LAUNCH_CREATE_DIALOG = "LAUNCH_CREATE_DIALOG";
 const NEXT_DATE = "NEXT_DATE";
 const PREV_DATE = "PREV_DATE";
 const SET_DATE = "SET_DATE";
@@ -9,7 +9,7 @@ export {
   CREATE_REMINDER,
   UPDATE_REMINDER,
   CLOSE_DIALOG,
-  OPEN_DIALOG,
+  LAUNCH_CREATE_DIALOG,
   NEXT_DATE,
   PREV_DATE,
   SET_DATE,
@@ -26,7 +26,7 @@ const setDate = (id) => (dispatch, useStore) => {
 };
 const createReminder = (id, reminder) => (dipatch, useStore) => {
   const { month } = useStore();
-  const date = month.flat().find((d) => d.id == id);
+  const date = month.flat().find((d) => d.id === id);
   if (date.reminders.length === 0) {
     date.reminders = date.reminders.concat({ ...reminder, id: 1 });
   } else {
@@ -36,6 +36,6 @@ const createReminder = (id, reminder) => (dipatch, useStore) => {
   dipatch({
     type: CREATE_REMINDER,
     id,
-    date,
+    day: date,
   });
 };

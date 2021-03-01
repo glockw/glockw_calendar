@@ -27,14 +27,15 @@ const reducerClosure = (hours) => (state, { type, index }) => {
   }
 };
 
-export function useTime() {
+export function useTime(_from = 0, _to = 1) {
   const hours = hourRange();
+  _to = _from >= _to ? _from + 1 : _to;
 
   const intialState = {
-    from: 0,
-    to: 1,
-    fromHour: hours[0],
-    toHour: hours[1],
+    from: _from,
+    to: _to,
+    fromHour: hours[_from],
+    toHour: hours[_to],
   };
   const [{ from, to, fromHour, toHour }, dispatch] = useReducer(
     reducerClosure(hours),

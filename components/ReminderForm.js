@@ -8,21 +8,24 @@ import InputForm from "./InputForm";
 import ReminderHeader from "./ReminderHeader";
 
 export default function RemainderForm() {
-  const { id } = useSelector((state) => state);
+  const {
+    day: { id },
+    reminder: { from, title, color, city },
+  } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const timeSettings = useTime();
-  const cityInput = useInput("");
-  const colorInput = useInput("#000000");
+  const timeSettings = useTime(from);
+  const cityInput = useInput(city);
+  const colorInput = useInput(color);
 
   const { input: titleInput, error, isInvalid } = useRequiredInput({
-    initial: "",
+    initial: title,
   });
 
   const save = (_) => {
     let { value: color } = colorInput;
     let { value: title } = titleInput;
     let { value: city } = cityInput;
-    let { from, to, fromHour, toHour } = timeSettings;
+    let { from, to, fromHour } = timeSettings;
     if (isInvalid()) {
       return;
     }
@@ -31,6 +34,7 @@ export default function RemainderForm() {
       color,
       city,
       from,
+      fromHour,
       to,
     };
     dispatch(createReminder(id, reminder));
