@@ -1,4 +1,6 @@
+import EventComponent from "../../components/Event";
 import Layout from "../../components/Layout";
+import PrevNext from "../../components/PrevNext";
 import ReminderHeader from "../../components/ReminderHeader";
 import { hourRange } from "../../services/time";
 
@@ -7,43 +9,46 @@ export default function DateComponent() {
 
   const reminders = [
     {
+      id: 1,
       title: "hola",
-      from: 3,
-      fromHour: "00:45",
+      from: 0,
+      fromHour: "00:00",
       color: "red",
-      to: 7,
+      to: 1,
     },
     {
+      id: 2,
       title: "adios",
       from: 3,
-      fromHour: "00:45",
+      fromHour: "00:30",
       color: "green",
       to: 8,
     },
     {
+      id: 3,
       title: "adiommgs",
       from: 3,
+      fromHour: "00:30",
+      color: "blue",
+      to: 6,
+    },
+    {
+      id: 4,
+      title: "adiommgs",
+      from: 0,
       fromHour: "00:45",
       color: "blue",
       to: 6,
     },
     {
+      id: 6,
       title: "adiommgs",
-      from: 3,
-      fromHour: "01:00",
+      from: 0,
+      fromHour: "00:45",
       color: "blue",
       to: 6,
     },
   ];
-  const styles = {
-    event: (h, color) => ({
-      height: `${h * 2.5 - 0.2}rem`,
-      top: 1,
-      width: "60%",
-      backgroundColor: color,
-      opacity: 0.8,
-    }),
-  };
 
   return (
     <Layout>
@@ -51,26 +56,19 @@ export default function DateComponent() {
         <div className="sticky top-0 z-20 bg-gray-200 w-full p-2 text-xl text-center">
           <ReminderHeader />
           {new Date().toDateString()}
+          <PrevNext />
         </div>
 
         <div className="mx-auto divide-y p-2  overflow-x-auto flex-col ">
           {hours.map((h, i) => (
-            <div className="relative w-full h-10" key={h}>
-              {h}
+            <div className="flex w-full  h-10" key={h}>
+              <span className="mr-4">{h}</span>
 
               {reminders
                 .filter((s) => s.fromHour == h)
                 .map((s, i) => {
                   return (
-                    <div
-                      key={`event__${i}`}
-                      style={styles.event(s.to - s.from, s.color)}
-                      className={`bg-indigo-500 rounded-lg z-10 sm:w-screen  absolute  left-${
-                        20 + 20 * i
-                      }`}
-                    >
-                      {s.title}
-                    </div>
+                    <EventComponent key={s.id} {...s} left={20 + i * 20} />
                   );
                 })}
             </div>
