@@ -1,6 +1,6 @@
 export default function LocationIcon({ text }) {
   return (
-    <div className=" flex w-full">
+    <div className="location flex w-full">
       <svg
         className="w-6 h-6"
         fill="none"

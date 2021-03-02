@@ -3,22 +3,25 @@
 @tailwind utilities;
 
 .day-base {
-  @apply border-2 border-gray-300 h-32 w-32 p-1 text-lg font-bold overflow-auto;
+  @apply border-2 border-gray-400 h-32 w-32 p-1 text-lg font-bold overflow-auto;
   cursor: pointer;
 }
 
 .day-name {
-  @apply bg-indigo-700 border-2 border-gray-300 h-10 w-32;
+  @apply bg-indigo-700 border-2 border-gray-400 h-10 w-32;
 }
 
 .day-tile {
-  @apply day-base bg-white;
+  @apply day-base bg-white text-gray-600;
 }
 
-.day_current {
+.day-current {
   @apply day-base bg-indigo-200 text-gray-600;
 }
 
+.weekend {
+  @apply day-base bg-gray-200 text-indigo-600;
+}
 .input-form {
   @apply mt-0 block w-full px-0.5 border-0 my-1 border-b-2 border-gray-200 focus:ring-0 focus:border-indigo-500;
 }

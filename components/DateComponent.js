@@ -65,7 +65,7 @@ export default function DateComponent() {
         {hours.map((h, i) => (
           <div
             onClick={(e) => createReminder(e, h)}
-            className={`flex w-full   h-10 pointer-events-auto hour-r  row-${i} `}
+            className={`flex w-full   h-10 hover:bg-gray-300 hour-r  cursor-pointer row-${i} `}
             key={h}
           >
             <span className="mr-8">{h}</span>

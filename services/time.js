@@ -66,6 +66,11 @@ const daysOfMonth = () => {
   ];
 };
 
+const duration = (from, to) => {
+  const delta = to - from;
+  const duration = delta * 15;
+  return duration > 45 ? `${duration / 60}h` : `${duration}min`;
+};
 const dateGenerator = (days, month, year) => {
   const today = new Date().toDateString();
   return new Array(days).fill(0).map((_, index) => {
@@ -80,4 +85,4 @@ const dateGenerator = (days, month, year) => {
   });
 };
 
-export { daysOfMonth, hourRange };
+export { daysOfMonth, hourRange, duration };
