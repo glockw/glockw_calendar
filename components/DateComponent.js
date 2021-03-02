@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { LAUNCH_DIALOG, NEXT_DATE, PREV_DATE } from "../actions/action";
 import { hourRange } from "../services/time";
 import EventComponent from "./Event";
@@ -8,10 +8,8 @@ import PrevNext from "./PrevNext";
 import ReminderHeader from "./ReminderHeader";
 
 const hours = hourRange();
-export default function DateComponent() {
+export default function DateComponent({ date }) {
   const dispatch = useDispatch();
-
-  const { day } = useSelector((state) => state);
 
   useEffect(() => {
     let selected = window.document.querySelector(".row-31");
@@ -33,15 +31,14 @@ export default function DateComponent() {
     },
   };
 
-  const reminders = day ? day.reminders : [];
-  debugger;
+  const reminders = date ? date.reminders : [];
   const createReminder = (e, h) => {
     const { classList } = e.target;
     if (classList.toString().indexOf("hour-r") < 0) return;
     dispatch({
       type: LAUNCH_DIALOG,
       update: false,
-      day,
+      day: date,
       reminder: {
         from: hours.indexOf(h),
         city: "",
@@ -53,7 +50,7 @@ export default function DateComponent() {
   return (
     <div className="mx-auto w-2/3 bg-white m-3  rounded-lg h-5/6 overflow-y-auto ">
       <div className="sticky top-0 z-20 bg-gray-200 w-full p-2 text-xl text-center">
-        <ReminderHeader />
+        <ReminderHeader date={date.date.toDateString()} />
         <Link href="/">
           <a>Home</a>
         </Link>

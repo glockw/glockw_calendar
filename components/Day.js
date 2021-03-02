@@ -32,14 +32,14 @@ export default function Day({ index, current, ...rest }) {
   const router = useRouter();
   const goTo = () => {
     dispatch(setDate(id));
-    router.push("/date");
+    router.push(`/date/${id}`);
   };
 
   return (
     <div onClick={goTo} className={classes.day(current, isWeekend)}>
       {index}
 
-      {reminders.map((r, i) => (
+      {data.map((r, i) => (
         <div
           className="flex px-1 justify-between"
           style={styles.reminder(r.color)}
