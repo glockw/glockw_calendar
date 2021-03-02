@@ -1,7 +1,7 @@
 const CREATE_REMINDER = "CREATE_REMINDER";
 const UPDATE_REMINDER = "UPDATE_REMINDER";
 const CLOSE_DIALOG = "CLOSE_DIALOG";
-const LAUNCH_CREATE_DIALOG = "LAUNCH_CREATE_DIALOG";
+const LAUNCH_DIALOG = "LAUNCH_DIALOG";
 const NEXT_DATE = "NEXT_DATE";
 const PREV_DATE = "PREV_DATE";
 const SET_DATE = "SET_DATE";
@@ -9,12 +9,12 @@ export {
   CREATE_REMINDER,
   UPDATE_REMINDER,
   CLOSE_DIALOG,
-  LAUNCH_CREATE_DIALOG,
+  LAUNCH_DIALOG,
   NEXT_DATE,
   PREV_DATE,
   SET_DATE,
 };
-export { createReminder, setDate };
+export { createReminder, updateReminder, setDate };
 
 const setDate = (id) => (dispatch, useStore) => {
   const { month } = useStore();
@@ -22,6 +22,20 @@ const setDate = (id) => (dispatch, useStore) => {
   dispatch({
     type: SET_DATE,
     day,
+  });
+};
+
+const updateReminder = (id, reminder) => (dispath, useStore) => {
+  debugger;
+  const { month } = useStore();
+  const date = month.flat().find((d) => d.id === id);
+  date.reminders = date.reminders.map((r) =>
+    r.id === reminder.id ? reminder : r
+  );
+  dispath({
+    type: UPDATE_REMINDER,
+    id,
+    day: date,
   });
 };
 const createReminder = (id, reminder) => (dipatch, useStore) => {

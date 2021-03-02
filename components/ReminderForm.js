@@ -1,5 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { createReminder } from "../actions/action";
+import {
+  CLOSE_DIALOG,
+  createReminder,
+  updateReminder,
+} from "../actions/action";
 import { useInput } from "../hooks/useInput";
 import { useRequiredInput } from "../hooks/useRequiredInput";
 import { useTime } from "../hooks/useTime";
@@ -9,27 +13,42 @@ import ReminderHeader from "./ReminderHeader";
 
 export default function RemainderForm() {
   const {
+    update,
     day: { id },
-    reminder: { from, title, color, city },
+    reminder: { id: reminderId, from, to, title, color, city },
   } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const timeSettings = useTime(from);
-  const cityInput = useInput(city);
+  const timeSettings = useTime(from, to);
   const colorInput = useInput(color);
 
-  const { input: titleInput, error, isInvalid } = useRequiredInput({
+  const {
+    input: titleInput,
+    error,
+    isInvalid: invalidTitle,
+  } = useRequiredInput({
     initial: title,
   });
+
+  const {
+    input: cityInput,
+    error: cityError,
+    isInvalid: invalidCity,
+  } = useRequiredInput({
+    initial: city,
+  });
+
+  const validations = [invalidCity, invalidTitle];
 
   const save = (_) => {
     let { value: color } = colorInput;
     let { value: title } = titleInput;
     let { value: city } = cityInput;
     let { from, to, fromHour } = timeSettings;
-    if (isInvalid()) {
+    if (validations.some((v) => v())) {
       return;
     }
     const reminder = {
+      id: reminderId,
       title,
       color,
       city,
@@ -37,9 +56,15 @@ export default function RemainderForm() {
       fromHour,
       to,
     };
-    dispatch(createReminder(id, reminder));
+
+    const action = update ? updateReminder : createReminder;
+    dispatch(action(id, reminder));
   };
 
+  const close = (_) =>
+    dispatch({
+      type: CLOSE_DIALOG,
+    });
   const settings = {
     error,
     errorMessage: "Title is Required!.",
@@ -53,22 +78,30 @@ export default function RemainderForm() {
     ...cityInput,
     maxLength: 50,
     type: "text",
+    error: cityError,
+    errorMessage: "City is Required!.",
     placeholder: "Add City",
   };
   return (
     <div>
       <ReminderHeader />
+      <br />
       <InputForm {...settings} />
       <FromTo settings={timeSettings} />
       <InputForm {...citySettings} />
+      <br />
 
       <label className="block">
         <input {...colorInput} className="input-form" type="color" />
       </label>
 
       <div className="flex justify-end py-2 inline-block mr-2 mt-2">
+        <button type="button" onClick={close} className="close-button">
+          Close
+        </button>
+
         <button onClick={save} type="button" className="save-button">
-          Add
+          {`${update ? "Update" : "Add"}`}
         </button>
       </div>
     </div>

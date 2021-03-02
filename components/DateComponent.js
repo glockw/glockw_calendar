@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { LAUNCH_CREATE_DIALOG, NEXT_DATE, PREV_DATE } from "../actions/action";
+import { LAUNCH_DIALOG, NEXT_DATE, PREV_DATE } from "../actions/action";
 import { hourRange } from "../services/time";
 import EventComponent from "./Event";
 import PrevNext from "./PrevNext";
@@ -35,9 +35,12 @@ export default function DateComponent() {
 
   const reminders = day ? day.reminders : [];
 
-  const createReminder = (h) => {
+  const createReminder = (e, h) => {
+    const { classList } = e.target;
+    if (classList.toString().indexOf("hour-r") < 0) return;
     dispatch({
-      type: LAUNCH_CREATE_DIALOG,
+      type: LAUNCH_DIALOG,
+      update: false,
       day,
       reminder: {
         from: hours.indexOf(h),
@@ -58,17 +61,14 @@ export default function DateComponent() {
         <PrevNext {...prevNext} />
       </div>
 
-      <div
-        style={{ scrollSnapAlign: "end" }}
-        className="mx-auto divide-y p-2 cursor-pointer overflow-x-auto flex-col "
-      >
+      <div className="mx-auto divide-y p-2  relative overflow-x-auto flex-col">
         {hours.map((h, i) => (
           <div
-            onClick={() => createReminder(h)}
-            className={`$flex w-full  h-10 hover:bg-gray-300 row-${i}`}
+            onClick={(e) => createReminder(e, h)}
+            className={`flex w-full   h-10 pointer-events-auto hour-r  row-${i} `}
             key={h}
           >
-            <span className="mr-4">{h}</span>
+            <span className="mr-8">{h}</span>
 
             {reminders
               .filter((s) => s.fromHour == h)
