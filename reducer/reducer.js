@@ -1,6 +1,7 @@
 import {
   CLOSE_DIALOG,
   CREATE_REMINDER,
+  DELETE_REMINDER,
   LAUNCH_DIALOG,
   NEXT_DATE,
   PREV_DATE,
@@ -42,12 +43,10 @@ const reducer = (state = initialState, action) => {
         ...state,
         day: state.month.flat()[action.index + 1],
       };
-    case PREV_DATE:
-      return {
-        ...state,
-      };
+
     case CREATE_REMINDER:
     case UPDATE_REMINDER:
+    case DELETE_REMINDER:
       let { id, day } = action;
       const nMonth = state.month.flat().map((d) => (d.id == id ? day : d));
       return {
@@ -62,31 +61,6 @@ const reducer = (state = initialState, action) => {
           nMonth.slice(28),
         ],
       };
-
-    //   const date = state.month.find((d) => d.date === day);
-    //   if (!date) return state;
-    //   date.reminders = date.reminders.concat(reminder);
-
-    //   return {
-    //     ...state,
-    //     isLoading: false,
-    //     showReminder: false,
-    //     month: state.month.map((s) => (s.date == day.date ? date : s)),
-    //   };
-    case UPDATE_REMINDER:
-      return state;
-    //   let { r, reminder } = action;
-
-    //   const date = state.month.find((d) => d.date === r);
-    //   if (!date) return state;
-    //   date.reminders = date.reminders.map((r) => r.from == reminder.from);
-
-    //   return {
-    //     ...state,
-    //     isLoading: false,
-    //     showReminder: false,
-    //     month: state.month.map((s) => (s.date == r.date ? date : s)),
-    //   };
 
     default:
       return state;

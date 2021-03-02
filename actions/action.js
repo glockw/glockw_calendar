@@ -5,6 +5,7 @@ const LAUNCH_DIALOG = "LAUNCH_DIALOG";
 const NEXT_DATE = "NEXT_DATE";
 const PREV_DATE = "PREV_DATE";
 const SET_DATE = "SET_DATE";
+const DELETE_REMINDER = "DELETE_REMINDER";
 export {
   CREATE_REMINDER,
   UPDATE_REMINDER,
@@ -13,8 +14,9 @@ export {
   NEXT_DATE,
   PREV_DATE,
   SET_DATE,
+  DELETE_REMINDER,
 };
-export { createReminder, updateReminder, setDate };
+export { createReminder, updateReminder, setDate, deleteReminder };
 
 const setDate = (id) => (dispatch, useStore) => {
   const { month } = useStore();
@@ -25,8 +27,18 @@ const setDate = (id) => (dispatch, useStore) => {
   });
 };
 
+const deleteReminder = (id, reminder) => (dispath, useStore) => {
+  const { month } = useStore();
+  const date = month.flat().find((d) => d.id === id);
+  date.reminders = date.reminders.filter((r) => r.id !== reminder.id);
+
+  dispath({
+    type: DELETE_REMINDER,
+    id,
+    day: date,
+  });
+};
 const updateReminder = (id, reminder) => (dispath, useStore) => {
-  debugger;
   const { month } = useStore();
   const date = month.flat().find((d) => d.id === id);
   date.reminders = date.reminders.map((r) =>
