@@ -1,4 +1,4 @@
-import ClockIcon from "./ClockIcon";
+import ClockIcon from "../icons/ClockIcon";
 
 export default function FromTo({ settings }) {
   const { from, to, fromHour, toHour, setFrom, setTo } = settings;

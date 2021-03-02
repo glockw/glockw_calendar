@@ -1,4 +1,4 @@
-import { DAYS_OF_WEEK } from "../utils/constant";
+import { DAYS_OF_WEEK } from "../../utils/constant";
 
 export default function DaysOfTheWeek() {
   const week = DAYS_OF_WEEK;

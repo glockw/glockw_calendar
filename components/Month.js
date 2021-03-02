@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import DaysOfTheWeek from "./DaysOfTheWeek";
+import DaysOfTheWeek from "../components/widgets/DaysOfTheWeek";
 import Week from "./Week";
 
 export default function Month() {

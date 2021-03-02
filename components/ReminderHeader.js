@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import ClockIcon from "./ClockIcon";
+import ClockIcon from "./icons/ClockIcon";
 
 export default function ReminderHeader() {
   const {

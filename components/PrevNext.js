@@ -1,4 +1,4 @@
-import ArrowButton, { NEXT, PREV } from "./ArrowButton";
+import ArrowButton, { NEXT, PREV } from "./widgets/ArrowButton";
 
 export default function PrevNext({ next = (f) => f, prev = (f) => f }) {
   return (

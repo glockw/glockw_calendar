@@ -7,9 +7,9 @@ import {
 import { useInput } from "../hooks/useInput";
 import { useRequiredInput } from "../hooks/useRequiredInput";
 import { useTime } from "../hooks/useTime";
-import FromTo from "./FromTo";
-import InputForm from "./InputForm";
 import ReminderHeader from "./ReminderHeader";
+import FromTo from "./widgets/FromTo";
+import InputForm from "./widgets/InputForm";
 
 export default function RemainderForm() {
   const {
