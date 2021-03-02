@@ -7,6 +7,7 @@ import {
 import { useInput } from "../hooks/useInput";
 import { useRequiredInput } from "../hooks/useRequiredInput";
 import { useTime } from "../hooks/useTime";
+import { getWeather } from "../pages/api";
 import ReminderHeader from "./ReminderHeader";
 import FromTo from "./widgets/FromTo";
 import InputForm from "./widgets/InputForm";
@@ -14,7 +15,7 @@ import InputForm from "./widgets/InputForm";
 export default function RemainderForm() {
   const {
     update,
-    day: { id },
+    day: { id, date },
     reminder: { id: reminderId, from, to, title, color, city },
   } = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ export default function RemainderForm() {
 
   const validations = [invalidCity, invalidTitle];
 
-  const save = (_) => {
+  const save = async (_) => {
     let { value: color } = colorInput;
     let { value: title } = titleInput;
     let { value: city } = cityInput;
@@ -47,6 +48,12 @@ export default function RemainderForm() {
     if (validations.some((v) => v())) {
       return;
     }
+
+    const fetch = async (date, city) => {
+      return await getWeather(date, city);
+    };
+    const weather = await fetch(date, city);
+
     const reminder = {
       id: reminderId,
       title,
@@ -55,6 +62,7 @@ export default function RemainderForm() {
       from,
       fromHour,
       to,
+      weather,
     };
 
     const action = update ? updateReminder : createReminder;

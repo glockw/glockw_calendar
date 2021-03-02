@@ -52,6 +52,7 @@ const updateReminder = (id, reminder) => (dispath, useStore) => {
 };
 const createReminder = (id, reminder) => (dipatch, useStore) => {
   const { month } = useStore();
+  debugger;
   const date = month.flat().find((d) => d.id === id);
   if (date.reminders.length === 0) {
     date.reminders = date.reminders.concat({ ...reminder, id: 1 });

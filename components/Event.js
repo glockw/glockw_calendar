@@ -17,7 +17,7 @@ const styles = {
   }),
 };
 
-function EventComponent({ id, from, to, color, title, city = "DR" }) {
+function EventComponent({ id, from, to, color, title, city = "DR", weather }) {
   const dispatch = useDispatch();
   const { day } = useSelector((state) => state);
   const height = to - from;
@@ -62,8 +62,13 @@ function EventComponent({ id, from, to, color, title, city = "DR" }) {
           </button>
         </div>
       </div>
+      <div className="flex items-start">
+        <LocationIcon text={city} />
 
-      <LocationIcon text={city} />
+        <span className="pl-4">
+          Forecast: {weather ? weather : "not available..."}
+        </span>
+      </div>
     </div>
   );
 }

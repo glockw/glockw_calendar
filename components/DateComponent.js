@@ -34,7 +34,7 @@ export default function DateComponent() {
   };
 
   const reminders = day ? day.reminders : [];
-
+  debugger;
   const createReminder = (e, h) => {
     const { classList } = e.target;
     if (classList.toString().indexOf("hour-r") < 0) return;
