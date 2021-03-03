@@ -39,7 +39,7 @@ const getPastMonthDay = () => {
     daysBack = daysBack.concat({
       id: `${prevMonth}-${pastMonthDays}`,
       index: pastMonthDays,
-      date: new Date(year, prevMonth, pastMonthDays),
+      date: new Date(year, prevMonth, pastMonthDays).toDateString(),
       current: false,
       reminders: [],
     });
@@ -74,12 +74,12 @@ const duration = (from, to) => {
 const dateGenerator = (days, month, year) => {
   const today = new Date().toDateString();
   return new Array(days).fill(0).map((_, index) => {
-    const date = new Date(year, month, index + 1);
+    const date = new Date(year, month, index + 1).toDateString();
     return {
       id: `${month}-${index}`,
       index: index + 1,
       date,
-      current: date.toDateString() === today,
+      current: date === today,
       reminders: [],
     };
   });

@@ -5,10 +5,14 @@ import Layout from "../../components/Layout";
 
 export default function Index() {
   const router = useRouter();
-  const { month } = useSelector((state) => state);
-
+  const { month, day } = useSelector((state) => state);
   const { id } = router.query;
-  const date = month.flat().find((d) => d.id === id);
+  let _id = id;
+  if (day && id !== day.id) {
+    _id = day.id;
+  }
+  const date = month.flat().find((d) => d.id == _id);
+
   if (!date) return <div>Error ...</div>;
   return (
     <Layout>

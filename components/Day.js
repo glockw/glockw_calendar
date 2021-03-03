@@ -23,7 +23,7 @@ export default function Day({ index, current, ...rest }) {
   let { date, reminders, id } = rest;
 
   const dispatch = useDispatch();
-  const day = date.getDay();
+  const day = new Date(date).getDay();
   const isWeekend = day === 0 || day === 6;
 
   const sortFun = (a, b) => a.from - b.from;

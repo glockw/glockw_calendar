@@ -20,13 +20,13 @@ export default function DateComponent({ date }) {
     prev: () => {
       dispatch({
         type: PREV_DATE,
-        index: day.index,
+        index: date.index,
       });
     },
     next: () => {
       dispatch({
         type: NEXT_DATE,
-        index: day.index,
+        index: date.index,
       });
     },
   };
@@ -50,7 +50,7 @@ export default function DateComponent({ date }) {
   return (
     <div className="mx-auto w-2/3 bg-white m-3  rounded-lg h-5/6 overflow-y-auto ">
       <div className="sticky top-0 z-20 bg-gray-200 w-full p-2 text-xl text-center">
-        <ReminderHeader date={date.date.toDateString()} />
+        <ReminderHeader date={date.date} />
         <Link href="/">
           <a>Home</a>
         </Link>
