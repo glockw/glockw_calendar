@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { CLOSE_DIALOG } from "../actions/action";
 
 export default function Dialog({ children, show = false }) {
-  const [open, setOpen] = useState(show);
-  if (!open) return <></>;
+  const dispatch = useDispatch();
+  const closeDialog = (_) =>
+    dispatch({
+      type: CLOSE_DIALOG,
+    });
+  if (!show) return <></>;
   return (
-    <div className="fixed z-2 inset-0 overflow-y-auto">
+    <div className="fixed z-40 inset-0 overflow-y-auto">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div
-          onClick={() => setOpen(false)}
+          onClick={closeDialog}
           className="fixed inset-0 transition-opacity"
           aria-hidden="true"
         >

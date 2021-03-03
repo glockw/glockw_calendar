@@ -1,8 +1,6 @@
-import moment from "moment";
-import ClockIcon from "./ClockIcon";
+import ClockIcon from "./icons/ClockIcon";
 
-export default function ReminderHeader() {
-  const date = moment().format("MMMM Do YYYY");
+export default function ReminderHeader({ date }) {
   return (
     <div className="flex flex-row justify-center items-center h-full">
       <ClockIcon />

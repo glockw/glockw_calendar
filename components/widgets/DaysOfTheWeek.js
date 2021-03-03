@@ -1,9 +1,9 @@
-import { DAYS_OF_WEEK } from "../utils/constant";
+import { DAYS_OF_WEEK } from "../../utils/constant";
 
 export default function DaysOfTheWeek() {
   const week = DAYS_OF_WEEK;
   return (
-    <div className="flex items-center">
+    <div className="flex w-full  items-center">
       {week.map((day, index) => (
         <div
           key={`day__${index}`}

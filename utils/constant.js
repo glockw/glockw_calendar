@@ -7,5 +7,19 @@ const DAYS_OF_WEEK = [
   "Friday",
   "Saturday",
 ];
+const MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
-export { DAYS_OF_WEEK };
+export { DAYS_OF_WEEK, MONTHS };

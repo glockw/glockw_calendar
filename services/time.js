@@ -37,9 +37,11 @@ const getPastMonthDay = () => {
   let year = prevM.year();
   while (start > 0) {
     daysBack = daysBack.concat({
+      id: `${prevMonth}-${pastMonthDays}`,
       index: pastMonthDays,
-      date: moment(`${prevMonth}-${pastMonthDays}-${year}`, "MM-DD-YYYY"),
+      date: new Date(year, prevMonth, pastMonthDays).toDateString(),
       current: false,
+      reminders: [],
     });
     pastMonthDays -= 1;
     start -= 1;
@@ -64,11 +66,23 @@ const daysOfMonth = () => {
   ];
 };
 
-const dateGenerator = (days, month, year) =>
-  new Array(days).fill(0).map((_, index) => ({
-    index: index + 1,
-    date: moment(`${month}-${index + 1}-${year}`, "MM-DD-YYYY"),
-    current: index + 1 === moment().date(),
-  }));
+const duration = (from, to) => {
+  const delta = to - from;
+  const duration = delta * 15;
+  return duration > 45 ? `${duration / 60}h` : `${duration}min`;
+};
+const dateGenerator = (days, month, year) => {
+  const today = new Date().toDateString();
+  return new Array(days).fill(0).map((_, index) => {
+    const date = new Date(year, month, index + 1).toDateString();
+    return {
+      id: `${month}-${index}`,
+      index: index + 1,
+      date,
+      current: date === today,
+      reminders: [],
+    };
+  });
+};
 
-export { daysOfMonth, hourRange };
+export { daysOfMonth, hourRange, duration };

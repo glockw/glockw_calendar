@@ -1,13 +1,15 @@
-import { daysOfMonth } from "../services/time";
-import DaysOfTheWeek from "./DaysOfTheWeek";
+import { useSelector } from "react-redux";
+import DaysOfTheWeek from "../components/widgets/DaysOfTheWeek";
 import Week from "./Week";
-
+import MonthHeader from "./widgets/MonthHeader";
 export default function Month() {
-  const weeks = daysOfMonth();
+  const { month } = useSelector((state) => state);
+
   return (
     <div className="mx-auto">
+      <MonthHeader />
       <DaysOfTheWeek />
-      {weeks.map((week, index) => (
+      {month.map((week, index) => (
         <Week key={`Week__${index}`} days={week} />
       ))}
     </div>
