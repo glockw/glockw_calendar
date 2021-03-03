@@ -1,15 +1,24 @@
 import { screen } from "@testing-library/react";
-import { getPage } from "next-page-tester";
+import {render} from "@testing-library/react";
+import DateComponent from "./components/DateComponent";
 
 describe("DateComponent", () => {
-  describe("render", () => {
-    it("should return a container", async () => {
-      const { render } = await getPage({
-        route: "/date/1-28",
-      });
+  describe(" reminder", () => {
+    it("should  create a reminder", async () => {
+   
+      const date = {
+        id:'28-2',
+        date: new Date().toDateString(),
+        reminders:[]
+      };
+      const {container, getByText, getByTestId}  = render(<DateComponent date={date}/>);
 
-      render();
-      expect(screen.getByText("Feb")).toBeInTheDocument();
+      ///it should load the container
+      //fire event click on time row
+      /// wait for modal to launch
+      /// fill the modal inputs
+      /// fire  save event
+      /// expect to container contain a div with the reminder
     });
   });
 });
