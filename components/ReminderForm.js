@@ -18,6 +18,7 @@ export default function RemainderForm() {
     day: { id, date },
     reminder: { id: reminderId, from, to, title, color, city },
   } = useSelector((state) => state);
+  debugger;
   const dispatch = useDispatch();
   const timeSettings = useTime(from, to);
   const colorInput = useInput(color);
@@ -92,7 +93,7 @@ export default function RemainderForm() {
   };
   return (
     <div>
-      <ReminderHeader />
+      <ReminderHeader date={date} />
       <br />
       <InputForm {...settings} />
       <FromTo settings={timeSettings} />
